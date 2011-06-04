@@ -1,13 +1,13 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls.defaults import patterns, include, url, handler404, handler500
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^polls/$', 'polls.views.index', name='home'),
-    url(r'^polls/(?P<poll_id>\d+)/$','polls.views.detail'),
-    url(r'^polls/(?P<poll_id>\d+)/results/$','polls.views.results'),
-    url(r'^polls/(?P<poll_id>\d+)/vote/$','polls.views.vote'),
+    url(r'^polls/', include('polls.urls'),),
+)
+
+urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls))
 )
